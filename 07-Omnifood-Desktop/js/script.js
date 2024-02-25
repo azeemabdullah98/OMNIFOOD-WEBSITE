@@ -12,7 +12,7 @@ btnNavEl.addEventListener("click", function () {
 //smooth scrolling
 
 const allLinks = document.querySelectorAll("a:link");
-console.log(allLinks);
+// console.log(allLinks);
 
 allLinks.forEach(function (link) {
   link.addEventListener("click", function (e) {
@@ -42,3 +42,27 @@ allLinks.forEach(function (link) {
 });
 
 ////////////////////////////////////////////////////////
+// Sticky Navigation
+///////////////////////////////////////////////////////
+
+const sectionHeroEl = document.querySelector(".section-hero");
+
+const obs = new IntersectionObserver(
+  function (entries) {
+    const ent = entries[0];
+    if (!ent.isIntersecting) {
+      console.log(ent);
+      document.body.classList.add("sticky");
+    }
+    if (ent.isIntersecting) {
+      document.body.classList.remove("sticky");
+    }
+  },
+  {
+    // In the viewport
+    root: null,
+    threshold: 0,
+    rootMargin: "-80px",
+  }
+);
+obs.observe(sectionHeroEl);
